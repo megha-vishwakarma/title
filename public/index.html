@@ -44,10 +44,10 @@
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/service-worker.js')
             .then(registration => {
-              console.log('service Worker supported ', registration);
+              // console.log('service Worker supported ', registration);
             })
             .catch(registrationError => {
-              console.log('SW not supported failed: ', registrationError);
+              // console.log('SW not supported failed: ', registrationError);
             });
         });
       }

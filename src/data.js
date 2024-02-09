@@ -39,7 +39,7 @@ export const heroData = {
   title: `Empowering Parents, Nurturing Futures `,
   subtitle:
     'Empowering Working Parents: Balancing professional demands with fostering early childhood development. CogniCare - Nurturing young minds with innovative AI-powered support',
-  btnText: 'Join CogniCare Today',
+  btnText: 'Let Get Started',
   image: HeroImage,
 };
 
@@ -160,6 +160,6 @@ export const footerData = {
 
 export const copyrightData = {
   text: '© CogniCare All rights reserved.',
-  icon: "<BsChatDotsFill />",
+  
 };
 

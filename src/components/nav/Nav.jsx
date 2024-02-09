@@ -8,15 +8,20 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { getTodos } from "../../firebase/firebaseUtils";
+import TodoModal from "./TodoModal";
+
+
 const Nav = ({ user }) => {
+    // const uid = useStore((state) => state.userUid);
     const [open, setOpen] = React.useState(false);
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
 
     const setUserUid = useStore((state) => state.setUserUid);
-    const uid = useStore((state) => state.userUid);
+    
     const provider = new GoogleAuthProvider();
-    const [todo, setTodo] = React.useState([])
+    const [todos, setTodo] = React.useState([])
+    const [uid, setUid] = React.useState(0)
     const navigate = useNavigate();
     const [isMenuHidden, setMenuHidden] = React.useState(true);
 
@@ -26,8 +31,10 @@ const Nav = ({ user }) => {
     };
 
     React.useEffect(() => {
-        
+        setUid(localStorage.getItem("uid"))
+        // console.log("nav" + uid)
         const fetchTodos = async () => {
+            
             const todos = await getTodos(uid);
             setTodo(todos);
             console.log(todos);
@@ -40,7 +47,7 @@ const Nav = ({ user }) => {
         } catch (error) {
             console.log(error);
         }
-    }, []);
+    }, [user]);
 
     const signInWithGoogle = async () => {
         try {
@@ -72,9 +79,9 @@ const Nav = ({ user }) => {
 
     return (
         <nav className=" flex flex-wrap items-center justify-between w-full py-2 md:py-4 px-4 text-lg text-gray-700 bg-white shadow-md ">
-            <Modal open={open} onClose={onCloseModal} center>
-                <h2>Simple centered modal</h2>
-            </Modal>
+            
+            <TodoModal todos={todos} open={open} onClose={() => setOpen(false)} />
+      
             <img
                 onClick={() => {
                     onCLickHandler("/");

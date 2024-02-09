@@ -17,7 +17,7 @@ const getTodos = async (uid) => {
                     id: key, // Use the key as the todo ID
                     ...todoData[key], // Spread the todo data
                 }));
-                console.log(`${uid }` + todoData)
+                // console.log(`${uid }` + todoData)
                 return todoDatas;
             } else {
                 console.log("No fav colors found");

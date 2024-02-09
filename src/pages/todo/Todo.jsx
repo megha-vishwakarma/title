@@ -6,16 +6,22 @@ import { db, auth } from "../../firebase/firebase.js";
 import { getTodos } from "../../firebase/firebaseUtils.jsx";
 import Loader from "../../components/loader/Loader.jsx";
 import useStore from "../../store/store.js";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
+
 const Todo = () => {
+    const [open, setOpen] = React.useState(false);
+
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
     const uid = useStore((state) => state.userUid);
     const [createTodo, setCreateTodo] = React.useState("");
     const [loading, setLoading] = React.useState(true);
     const [todos, setTodo] = React.useState([]);
 
     React.useEffect(() => {
-        
         const fetchTodos = async () => {
-            console.log(uid)
+            console.log(uid);
             const todos = await getTodos(uid);
             setTodo(todos);
             console.log(todos);
@@ -42,8 +48,8 @@ const Todo = () => {
     };
 
     //Add Todo Handler
-    const submitTodo = async (e) => {
-        e.preventDefault();
+    const submitTodo = async () => {
+        
 
         const todo = {
             todo: createTodo,
@@ -55,15 +61,13 @@ const Todo = () => {
             const todoRef = ref(db, `todos/${uid}`);
             const newTodoRef = push(todoRef); // Generate unique key for new todo
             await set(newTodoRef, todo);
-            setTodo("")
+            setCreateTodo("");
             console.log("Todo added successfully!");
-            
         } catch (error) {
             console.error("Error adding todo: ", error);
         }
 
-        
-
+        onCloseModal()
     };
 
     return (
@@ -74,12 +78,13 @@ const Todo = () => {
                         <div className="card card-white">
                             <div className="card-body">
                                 <button
+                                    onClick={onOpenModal}
                                     data-bs-toggle="modal"
                                     data-bs-target="#addModal"
                                     type="button"
                                     className="btn btn-info"
                                 >
-                                    Add Todo
+                                    Add
                                 </button>
 
                                 {loading ? (
@@ -120,55 +125,42 @@ const Todo = () => {
             </div>
 
             {/* Modal */}
-            <div
-                className="modal fade"
-                id="addModal"
-                tabIndex="-1"
-                aria-labelledby="addModalLabel"
-                aria-hidden="true"
-            >
-                <div className="modal-dialog">
-                    <form className="d-flex" onSubmit={submitTodo}>
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="addModalLabel">
-                                    Add Todo
-                                </h5>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-                            <div className="modal-body">
-                                <input
-                                    onChange={(e) =>
-                                        setCreateTodo(e.target.value)
-                                    }
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Add a Todo"
-                                />
-                            </div>
-                            <div className="modal-footer">
-                                <button
-                                    className="btn btn-secondary"
-                                    data-bs-dismiss="modal"
-                                >
-                                    Close
-                                </button>
 
-                                <button className="btn btn-primary"
-                                onClick={submitTodo}
-                                >
-                                    Create Todo
-                                </button>
-                            </div>
+            <Modal open={open} onClose={onCloseModal} center>
+                <div className="flex">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="addModalLabel">
+                                Add Todo
+                            </h5>
+                            
                         </div>
-                    </form>
+                        <div className="modal-body">
+                            <input
+                                onChange={(e) => setCreateTodo(e.target.value)}
+                                type="text"
+                                className="form-control"
+                                placeholder="Add a Todo"
+                            />
+                        </div>
+                        <div className="modal-footer">
+                            <button
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Close
+                            </button>
+
+                            <button
+                                className="btn btn-primary"
+                                onClick={submitTodo}
+                            >
+                                Create Todo
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </Modal>
         </>
     );
 };

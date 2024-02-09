@@ -76,7 +76,7 @@ const Features = () => {
                                     <div className="flex items-center gap-x-2 group">
                                         <Link
                                             className="text-primary font-bold"
-                                            to={link}
+                                            
                                         >
                                             {linkText}
                                         </Link>
