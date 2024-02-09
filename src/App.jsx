@@ -8,12 +8,12 @@ import PaintGame from "./pages/games/paintGame/PaintGame";
 import ParentDashboard from "./pages/parent/ParentDashboard";
 import { auth } from "./firebase/firebase";
 import FaceVerification from "./pages/face/FaceVerification.jsx"
-import { faL } from "@fortawesome/free-solid-svg-icons";
 import useStore from "./store/store";
 import { useSpeechSynthesis } from "react-speech-kit";
 import CommonGame from "./pages/games/CommonGame.jsx";
 
 export default function App() {
+
     const setUserUid = useStore((state) => state.setUserUid);
     const [value, setValue] = React.useState(
         "Welcome to cognicare,  I am your AI Companion, Kindly check your HomeWork"
@@ -24,7 +24,20 @@ export default function App() {
     const [uid, setUid] = React.useState(false);
     const getUid = useStore((state) => state.userUid);
     const [loading, setLoading] = React.useState(true)
+
+    const speakOnMount = () => {
+        
+        speak({ text: value });
+        
+    };
+
+
+    
     React.useEffect(() => {
+
+        // speakOnMount()
+        
+        
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 // User is logged in
@@ -37,6 +50,7 @@ export default function App() {
                 
                 // console.log(getUid + "mujeeb")
             } else {
+                setLoading(false)
                 // User is not logged in
                 setUid(null);
                 setLogin(false);

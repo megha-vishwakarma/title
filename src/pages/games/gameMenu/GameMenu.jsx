@@ -5,6 +5,7 @@ import GuessTheColorGame from "../guessGames/guess-the-color/GuessTheColorGame.j
 import img from "../../../assets/img/abstract/i6.png";
 import paintImg from "../../../assets/img/paint.png";
 import useStore from "../../../store/store.js";
+import { useSpeechSynthesis } from "react-speech-kit";
 
 const routesConfig = [
     {
@@ -49,7 +50,14 @@ const routesConfig = [
     }
 ];
 
+
 const GameMenu = () => {
+
+    const [value, setValue] = React.useState("Play, Learn and Grow by plying games that are especially designed for you")
+
+    const { speak } = useSpeechSynthesis();
+
+   
 
     const setGame = useStore((state) => state.setGame)
     const navigate = useNavigate();
@@ -60,6 +68,16 @@ const GameMenu = () => {
             setGame(route.load)
             navigate("/common-game");
         }
+    };
+
+    React.useEffect (()=> {
+        speakOnMount()
+    }, [])
+
+    const speakOnMount = () => {
+        
+        speak({ text: value });
+        setValue("")
     };
     return (
         <div className=" p-20">
