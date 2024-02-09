@@ -1,4 +1,5 @@
 #Cogni Care
+##
 The aim of this project is to develop a comprehensive and accessible support system that empowers working parents to actively participate in and enhance their children's brain development during the critical early years. By addressing these challenges, the project seeks to create a positive and nurturing environment that fosters optimal cognitive, emotional, and social development for children under 6 in the context of a working parent's lifestyle.
 “ Smart Beginnings, Bright Tomorrows: AI Empowering Parents, Igniting Young Minds! ” 
 
