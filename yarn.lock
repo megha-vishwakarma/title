@@ -783,6 +783,11 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.4.2"
 
+"@google/generative-ai@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@google/generative-ai/-/generative-ai-0.2.1.tgz#29e5e7fb9379413fdac6da42d22f86c2f9ecc078"
+  integrity sha512-gNmMFadfwi7qf/6M9gImgyGJXY1jKQ/de8vGOqgJ0PPYgQ7WwzZDavbKrIuXS2zdqZZaYtxW3EFN6aG9x5wtFw==
+
 "@grpc/grpc-js@~1.9.0":
   version "1.9.14"
   resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.9.14.tgz#236378822876cbf7903f9d61a0330410e8dcc5a1"

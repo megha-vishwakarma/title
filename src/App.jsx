@@ -11,13 +11,18 @@ import FaceVerification from "./pages/face/FaceVerification.jsx"
 import useStore from "./store/store";
 import { useSpeechSynthesis } from "react-speech-kit";
 import CommonGame from "./pages/games/CommonGame.jsx";
-
+import ChatbotBody from "./components/chatbot/ChatbotBody.jsx";
+import ChatbotButton from "./components/chatbot/ChatbotButton.jsx";
 export default function App() {
 
     const setUserUid = useStore((state) => state.setUserUid);
     const [value, setValue] = React.useState(
         "Welcome to cognicare,  I am your AI Companion, Kindly check your HomeWork"
     );
+    const [isChatOpen, setIsChatOpen] = React.useState(false);
+
+    
+
     const { speak } = useSpeechSynthesis();
     const [login, setLogin] = React.useState(false)
     const [displayName, setDisplayName] = React.useState("");
@@ -81,6 +86,12 @@ export default function App() {
                 <Route exact path = "/common-game" element={<CommonGame/>}/>
                 <Route exact path="/parent-dashboard" element={<ParentDashboard name={displayName} uid={uid}/>}/>
             </Routes>
+
+            <ChatbotButton
+                isChatOpen={isChatOpen}
+                setIsChatOpen={setIsChatOpen}
+            />
+            {isChatOpen && <ChatbotBody />}
         </Router>
     );
 }

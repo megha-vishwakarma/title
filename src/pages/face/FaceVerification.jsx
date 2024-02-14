@@ -49,7 +49,7 @@ const FaceVerification = () => {
                     url: "https://faceanalyzer-ai.p.rapidapi.com/faceanalysis",
                     headers: {
                         "X-RapidAPI-Key":
-                            "0dac06a83emshb5b55fdab9334c1p1b27c6jsn821d19947fad",
+                            "cb8547e891msh826532480e712f9p1375fbjsnb1e98f6cac7a",
                         "X-RapidAPI-Host": "faceanalyzer-ai.p.rapidapi.com",
                     },
                     data: formData,
